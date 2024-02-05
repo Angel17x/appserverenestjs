@@ -1,4 +1,6 @@
 export const enum JwtEnum {
   ERROR = 'JsonWebTokenError',
-  EXPIRE = 'TokenExpiredError'
+  EXPIRE = 'TokenExpiredError',
+  FORBIDDEN = 'ForbiddenError',
+  UNAUTHORIZED = 'UnauthorizedError'
 }

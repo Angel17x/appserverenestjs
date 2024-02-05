@@ -9,6 +9,7 @@ import { UUID } from 'crypto';
 @Injectable()
 export class UsersServiceImpl implements UsersService {
   constructor(private readonly usersUseCase: UsersUseCase) {}
+  
   findEmailAndPassword(user: LoginDto): Promise<Users> {
     return this.usersUseCase.findEmailAndPassword(user);
   }
@@ -20,5 +21,8 @@ export class UsersServiceImpl implements UsersService {
   }
   updateAt(id:UUID, user: UserDto): Promise<boolean> {
     return this.usersUseCase.update(id, user);
+  }
+  delete(id: UUID): Promise<boolean> {
+    return this.usersUseCase.delete(id);
   }
 }

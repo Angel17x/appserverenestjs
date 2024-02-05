@@ -8,4 +8,5 @@ export interface UsersService {
   findAll(): Promise<Users[]>
   create(user: UserDto): Promise<Users>
   updateAt(id:UUID, user: UserDto): Promise<boolean>
+  delete(id:UUID): Promise<boolean>
 }

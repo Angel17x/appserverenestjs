@@ -22,7 +22,7 @@ export class LoginUseCase {
 
     } catch (error) {
       if(!error) throw new HttpException('Error al autenticar al usuario', HttpStatus.INTERNAL_SERVER_ERROR);
-      throw new HttpException(error.message, error.status);
+      throw new HttpException(error.message, error.status ?? HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 

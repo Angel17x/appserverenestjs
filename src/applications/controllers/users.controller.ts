@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Post, Put, Query, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Post, Put, Query, Res, UseGuards } from '@nestjs/common';
 import { UserDto } from 'src/applications/dto/register-user.dto';
 import { Users } from 'src/domains/entities/user.entity';
 import { UsersServiceImpl } from '../services/users.service.impl';
@@ -22,8 +22,13 @@ export class UsersController {
 
   @Put('/update-user')
   async update(@Query() id: UUID, @Body() user: UserDto, @Res() res): Promise<void> {
-    console.log(id);
-    const result = await this.usersService.updateAt(id as UUID, user);
+    const result = await this.usersService.updateAt(id, user);
+    return res.status(HttpStatus.NO_CONTENT).send();
+  }
+
+  @Delete('/delete-user')
+  async delete(@Query() id: UUID, @Res() res): Promise<void> {
+    await this.usersService.delete(id);
     return res.status(HttpStatus.NO_CONTENT).send();
   }
 }

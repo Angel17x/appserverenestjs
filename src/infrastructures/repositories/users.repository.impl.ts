@@ -32,8 +32,9 @@ export class UsersRepositoryImpl implements UsersRepository {
       }
     )).affected === 1 ? true : false;
   }
-  async delete(id: string): Promise<boolean> {
-    return (await this.userRepository.delete(id)).affected === 1 ? true : false;
+  async delete(id: UUID): Promise<boolean> {
+    const result = (await this.userRepository.delete(id));
+    return result.affected === 1 ? true : false
   }
 
   find(user: LoginDto): Promise<Users | null> {
