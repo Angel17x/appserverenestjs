@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config'; // Importa ConfigModule y ConfigService
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Users } from 'src/domains/entities/user.entity';
+import { Users, Binnacle } from 'src/domains/entities/entities';
 import { TypeOrmProvider } from 'src/infrastructures/config/database.provider';
 
 @Module({
@@ -12,7 +12,7 @@ import { TypeOrmProvider } from 'src/infrastructures/config/database.provider';
       imports: [ConfigModule], // Asegúrate de importar ConfigModule aquí también
       inject: [ConfigService], // Inyecta ConfigService en TypeOrmProvider
     }),
-    TypeOrmModule.forFeature([Users]),
+    TypeOrmModule.forFeature([Users, Binnacle]),
   ],
   providers: [],
   exports: [TypeOrmModule],
