@@ -1,7 +1,3 @@
-# Configuración
-  - Recuerda crear tus archivos de configuración *.yaml (hasta el momento solo esta en desarrollo)
-  - En infraestructures/config/interfaces está la interfaz para saber las variables del yaml
-
 # Configuración de Variables de Entorno
 
 Para configurar las variables de entorno manualmente, sigue estos pasos:
