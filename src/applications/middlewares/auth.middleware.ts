@@ -11,16 +11,21 @@ export class AuthMiddleware implements NestMiddleware {
     try {
       const token = (req.headers.authorization ?? '').split(' ')[1] ?? null;
       console.log(token)
-      if (!token) throw new HttpException(JwtEnum.FORBIDDEN, HttpStatus.FORBIDDEN);
+      if (!token){
+        throw new HttpException(JwtEnum.FORBIDDEN, HttpStatus.FORBIDDEN);
+      }
       await this.jwtService.verify(token);
       next();
     } catch (error) {
       if (!error) throw new HttpException('Error al leer el token de acceso', HttpStatus.INTERNAL_SERVER_ERROR);
-      switch(error.name){
+      const err = error.name === 'HttpException' ? error.response : error.name;
+      switch(err){
         case JwtEnum.ERROR:
           throw new HttpException('Token de autenticación inválido', HttpStatus.BAD_REQUEST);
         case JwtEnum.EXPIRE:
           throw new HttpException('Token de autenticación expirado', HttpStatus.UNAUTHORIZED);
+        case JwtEnum.UNAUTHORIZED:
+          throw new HttpException('Token no proporcionado', HttpStatus.FORBIDDEN);
         case JwtEnum.FORBIDDEN:
           throw new HttpException('Token no proporcionado', HttpStatus.FORBIDDEN);
         default:
