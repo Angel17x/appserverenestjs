@@ -2,9 +2,8 @@
 https://docs.nestjs.com/controllers#controllers
 */
 
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { LoginDto } from 'src/applications/dto/login.dto';
-import { Users } from 'src/domains/entities/user.entity';
 import { LoginServiceImpl } from '../services/login.service.impl';
 import { AuthEntity } from 'src/domains/entities/auth.entity';
 
