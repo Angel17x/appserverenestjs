@@ -18,7 +18,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe(globalPipeOptions));
 
-  const port = process.env.SERVER_PORT || 3000;
+  const port = process.env.PORT || 80;
   
   await app.listen(port, '0.0.0.0'); 
   Logger.log(`Server is running on ${port}`, 'Bootstrap');
