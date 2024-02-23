@@ -2,22 +2,18 @@ import { Injectable } from "@nestjs/common";
 import { sign, verify } from 'jsonwebtoken';
 import { Users } from "src/domains/entities/user.entity";
 import { AuthEntity } from "src/domains/entities/auth.entity";
-import { ConfigService } from "@nestjs/config";
 import { JwtService } from "./jwt.service";
-import { AuthConfig } from "src/infrastructures/config/interfaces/config.interface";
 
 @Injectable()
 export class JwtServiceImpl implements JwtService {
-  constructor(
-    private readonly configService: ConfigService
-  ){}
   async verify(token: string): Promise<any> {
-    const { jwt } = this.configService.get<AuthConfig>('auth');
-    return verify(token, jwt.secret);
+    const secret = process.env.JWT_SECRET;
+    return verify(token, secret);
   }
 
   async sign(payload: Users): Promise<AuthEntity> {
-    const { jwt } = this.configService.get<AuthConfig>('auth');
-    return { token: sign({...payload}, jwt.secret, { expiresIn: jwt.expiresIn }) };
+    const secret = process.env.JWT_SECRET;
+    const expiresIn = process.env.JWT_EXPIRES_IN;
+    return { token: sign({ ...payload }, secret, { expiresIn }) };
   }
-}
+} 
