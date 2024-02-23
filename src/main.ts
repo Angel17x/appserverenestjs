@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './applications/modules/app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { config } from 'dotenv';
+import { HttpErrorFilter } from './applications/middlewares/http.error-filter.middleware';
 
 // Carga las variables de entorno desde el archivo .env
 config();
@@ -17,6 +18,7 @@ async function bootstrap() {
   };
 
   app.useGlobalPipes(new ValidationPipe(globalPipeOptions));
+  app.useGlobalFilters(new HttpErrorFilter());
 
   const port = process.env.PORT || 80;
   
