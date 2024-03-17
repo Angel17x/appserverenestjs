@@ -20,6 +20,11 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe(globalPipeOptions));
   app.useGlobalFilters(new HttpErrorFilter());
 
+  app.enableCors({
+    origin: process.env.CORS_ORIGIN,
+    methods: process.env.CORS_METHODS
+  });
+
   const port = process.env.PORT || 80;
   
   await app.listen(port, '0.0.0.0'); 
