@@ -35,6 +35,17 @@ export class UsersUseCase {
     }
   }
 
+  async findById(id: string): Promise<Users> {
+    try {
+      if(!id) throw new HttpException('ID not found', HttpStatus.BAD_REQUEST);
+      const repoUser = await this.usersRepository.findById(id);
+      return repoUser;
+    } catch (error) {
+      if (!error) throw new HttpException('Error al obtener el usuario', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(error.message, error.status ?? HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
   async create(user: UserDto): Promise<Users> {
     try {
       const isExistsUser = await this.usersRepository.isExists(user.email);

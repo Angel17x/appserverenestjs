@@ -15,6 +15,11 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @Get('/user')
+  async findById(@Query('id') id: string): Promise<Users> {
+    return this.usersService.findById(id);
+  }
+
   @Post('/create-user')
   async create(@Body() user: UserDto): Promise<Users> {
     return this.usersService.create(user);

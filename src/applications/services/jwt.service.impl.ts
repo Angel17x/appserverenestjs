@@ -11,7 +11,7 @@ export class JwtServiceImpl implements JwtService {
     return verify(token, secret);
   }
 
-  async sign(payload: Users): Promise<AuthEntity> {
+  async sign(payload: Users): Promise<object> {
     const secret = process.env.JWT_SECRET;
     const expiresIn = process.env.JWT_EXPIRES_IN;
     return { token: sign({ ...payload }, secret, { expiresIn }) };

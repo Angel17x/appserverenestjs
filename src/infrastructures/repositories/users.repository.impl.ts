@@ -16,7 +16,7 @@ export class UsersRepositoryImpl implements UsersRepository {
     return this.userRepository.find({ cache: true });
   }
   findById(id: any): Promise<Users> {
-    return this.userRepository.findOne(id);
+    return this.userRepository.findOne({ where: { id: id } });
   }
   async create(user: UserDto): Promise<Users> {
     return this.userRepository.save(user);

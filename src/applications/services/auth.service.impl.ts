@@ -9,7 +9,7 @@ import { JwtServiceImpl } from "./jwt.service.impl";
 export class AuthServiceImpl implements AuthService {
   constructor(private readonly jwtService: JwtServiceImpl) { }
 
-  async generateToken(payload: Users): Promise<AuthEntity> {
+  async generateToken(payload: Users): Promise<any> {
     const token = await this.jwtService.sign(payload);
     return token;
   }
