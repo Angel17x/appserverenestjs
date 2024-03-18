@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { LoginDto } from 'src/applications/dto/login.dto';
-import { Users } from 'src/domains/entities/user.entity';
+import { User } from 'src/domains/entities/user.entity';
 import { LoginUseCase } from 'src/domains/usecases/login.usecase';
 import { LoginService } from './login.service';
 import { AuthEntity } from 'src/domains/entities/auth.entity';
@@ -10,7 +10,7 @@ export class LoginServiceImpl implements LoginService {
   constructor(
     private readonly loginUseCase: LoginUseCase
   ) {}
-  // find(user: LoginDto): Promise<Users> {
+  // find(user: LoginDto): Promise<User> {
   //   throw new Error('Method not implemented.');
   // }
  

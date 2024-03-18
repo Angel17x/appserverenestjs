@@ -1,2 +1,2 @@
-export { Users } from "./user.entity";
+export { User } from "./user.entity";
 export { Binnacle } from "./binnacle.entity";

@@ -1,7 +1,7 @@
 import { Catch, HttpException, HttpStatus, Injectable } from "@nestjs/common";
 
 import { LoginDto } from "../../applications/dto/login.dto";
-import { Users } from "../entities/user.entity";
+import { User } from "../entities/user.entity";
 import { UsersRepositoryImpl } from "src/infrastructures/repositories/users.repository.impl";
 import { AuthServiceImpl } from "src/applications/services/auth.service.impl";
 import { AuthEntity } from "../entities/auth.entity";

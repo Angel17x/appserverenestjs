@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, HttpStatus, Post, Put, Query, Res, UseGuards } from '@nestjs/common';
 import { UserDto } from 'src/applications/dto/register-user.dto';
-import { Users } from 'src/domains/entities/user.entity';
+import { User } from 'src/domains/entities/user.entity';
 import { UsersServiceImpl } from '../services/users.service.impl';
 import { AuthMiddleware } from '../middlewares/auth.middleware';
 import { UUID } from 'crypto';
@@ -11,17 +11,17 @@ export class UsersController {
   constructor(private readonly usersService: UsersServiceImpl) {}
 
   @Get('/users')
-  async findAll(): Promise<Users[]> {
+  async findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
 
   @Get('/user')
-  async findById(@Query('id') id: string): Promise<Users> {
+  async findById(@Query('id') id: string): Promise<User> {
     return this.usersService.findById(id);
   }
 
   @Post('/create-user')
-  async create(@Body() user: UserDto): Promise<Users> {
+  async create(@Body() user: UserDto): Promise<User> {
     return this.usersService.create(user);
   }
 

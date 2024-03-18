@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Users, Binnacle } from 'src/domains/entities/entities';
+import { User, Binnacle } from 'src/domains/entities/entities';
 import { TypeOrmProvider } from 'src/infrastructures/config/database.provider';
 
 @Module({
@@ -8,7 +8,7 @@ import { TypeOrmProvider } from 'src/infrastructures/config/database.provider';
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmProvider,
     }),
-    TypeOrmModule.forFeature([Users, Binnacle]),
+    TypeOrmModule.forFeature([User, Binnacle]),
   ],
   providers: [],
   exports: [TypeOrmModule],

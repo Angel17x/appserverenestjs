@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersUseCase } from 'src/domains/usecases/users.usecase';
 import { LoginDto } from 'src/applications/dto/login.dto';
-import { Users } from 'src/domains/entities/user.entity';
+import { User } from 'src/domains/entities/user.entity';
 import { UserDto } from 'src/applications/dto/register-user.dto';
 import { UUID } from 'crypto';
 
@@ -10,16 +10,16 @@ import { UUID } from 'crypto';
 export class UsersServiceImpl implements UsersService {
   constructor(private readonly usersUseCase: UsersUseCase) {}
   
-  findEmailAndPassword(user: LoginDto): Promise<Users> {
+  findEmailAndPassword(user: LoginDto): Promise<User> {
     return this.usersUseCase.findEmailAndPassword(user);
   }
-  findAll(): Promise<Users[]> {
+  findAll(): Promise<User[]> {
       return this.usersUseCase.findAll();
   }
-  findById(id: string): Promise<Users> {
+  findById(id: string): Promise<User> {
     return this.usersUseCase.findById(id);
   }
-  create(user: UserDto): Promise<Users> {
+  create(user: UserDto): Promise<User> {
       return this.usersUseCase.create(user);
   }
   updateAt(id:UUID, user: UserDto): Promise<boolean> {

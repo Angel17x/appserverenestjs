@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { LoginDto } from "src/applications/dto/login.dto";
-import { Users } from "src/domains/entities/user.entity";
+import { User } from "src/domains/entities/user.entity";
 import { UsersRepository } from "src/domains/repositories/users.repository";
 import { Repository } from "typeorm";
 import { InjectRepository } from '@nestjs/typeorm';
@@ -10,15 +10,15 @@ import { UUID } from "crypto";
 @Injectable()
 export class UsersRepositoryImpl implements UsersRepository {
   constructor(
-    @InjectRepository(Users)
-    private readonly userRepository: Repository<Users>) { }
-  findAll(): Promise<Users[]> {
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>) { }
+  findAll(): Promise<User[]> {
     return this.userRepository.find({ cache: true });
   }
-  findById(id: any): Promise<Users> {
+  findById(id: any): Promise<User> {
     return this.userRepository.findOne({ where: { id: id } });
   }
-  async create(user: UserDto): Promise<Users> {
+  async create(user: UserDto): Promise<User> {
     return this.userRepository.save(user);
   }
   async updateAt(id: UUID, user: UserDto): Promise<boolean> {
@@ -37,7 +37,7 @@ export class UsersRepositoryImpl implements UsersRepository {
     return result.affected === 1 ? true : false
   }
 
-  find(user: LoginDto): Promise<Users | null> {
+  find(user: LoginDto): Promise<User | null> {
     const { email, password } = user;
     return this.userRepository.findOne({ where: { email, password } });
   }

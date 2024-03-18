@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { SeedService } from "./seed.service";
-import { Users } from "src/domains/entities/user.entity";
+import { User } from "src/domains/entities/user.entity";
 import { UserDto } from "../dto/register-user.dto";
 import { UsersUseCase } from "src/domains/usecases/users.usecase";
 
@@ -8,7 +8,7 @@ import { UsersUseCase } from "src/domains/usecases/users.usecase";
 export class SeedServiceImpl implements SeedService  {
   constructor(private readonly usersUseCase: UsersUseCase) {}
  
-  createDefaultUser(user: UserDto): Promise<Users> {
+  createDefaultUser(user: UserDto): Promise<User> {
     return this.usersUseCase.create(user);
   }
   async seed(users: UserDto[]): Promise<boolean> {

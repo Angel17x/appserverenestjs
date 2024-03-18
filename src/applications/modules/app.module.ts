@@ -5,6 +5,7 @@ import { DatabaseModule } from './database.module';
 import { UsersModule } from './users.module';
 import { InitController } from '../controllers/init.controller';
 import { LoggerMiddleware } from '../middlewares/logger.http.middleware';
+import { TeachersModule } from './teachers.module';
 
 
 @Module({
@@ -12,7 +13,8 @@ import { LoggerMiddleware } from '../middlewares/logger.http.middleware';
     ConfigModules, 
     DatabaseModule,
     AuthModule,
-    UsersModule,  
+    UsersModule,
+    TeachersModule,  
   ],
   controllers: [ InitController ],
   providers: [ ],
