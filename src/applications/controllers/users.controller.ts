@@ -32,7 +32,7 @@ export class UsersController {
   }
 
   @Delete('/delete-user')
-  async delete(@Query() id: UUID, @Res() res): Promise<void> {
+  async delete(@Query('id') id: UUID, @Res() res): Promise<void> {
     await this.usersService.delete(id);
     return res.status(HttpStatus.NO_CONTENT).send();
   }

@@ -20,4 +20,11 @@ export class UserDto {
 
   @IsEnum(Role)
   role: Role | Role.PEOPLE;
+
+  constructor(name: string, email: string, password: string, role: Role){
+    this.name = name;
+    this.email = email;
+    this.password = password;
+    this.role = role;
+  }
 }

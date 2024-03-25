@@ -1,9 +1,9 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./user.entity";
 
-@Entity({ name: "teacher" })
-export class Teacher {
-  @PrimaryGeneratedColumn('uuid', { name: 'idbinnacle' })
+@Entity({ name: 'student' })
+export class Student {
+  @PrimaryGeneratedColumn('uuid', { name: 'idstudent' })
   idTeacher: string;
 
   @Column({ name: 'name' })
@@ -19,6 +19,6 @@ export class Teacher {
   phone: string;
 
   @ManyToOne(() => User, { eager: true }) // Indica la relación con la entidad User
-  @JoinColumn({ name: 'userId', referencedColumnName: 'id' })
-  userId: User;
+  @JoinColumn({ name: 'userid', referencedColumnName: 'id' })
+  userid: User;
 }

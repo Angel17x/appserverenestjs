@@ -8,7 +8,7 @@ import { Binnacle } from "src/domains/entities/binnacle.entity";
 export class BinnacleRepositoryImpl implements BinnacleRepository {
   constructor(
     @InjectRepository(Binnacle)
-    private readonly userRepository: Repository<Binnacle>) { }
+    private readonly binnacleRepository: Repository<Binnacle>) { }
   findAll(): Promise<Binnacle[]> {
     throw new Error("Method not implemented.");
   }

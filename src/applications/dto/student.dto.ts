@@ -1,8 +1,7 @@
 import { IsString, MinLength, IsPhoneNumber, IsUUID, isNotEmpty, IsEmpty, IsNotEmpty } from 'class-validator';
-import { UUID } from 'crypto';
 import { User } from 'src/domains/entities/user.entity';
 
-export class TeacherDto {
+export class StudentDto {
   @IsString()
   @MinLength(2)
   name: string;
@@ -15,7 +14,7 @@ export class TeacherDto {
   @MinLength(8)
   address: string;
 
-  @IsPhoneNumber()
+  @IsPhoneNumber('VE')
   phone: string;
 
   @IsUUID()

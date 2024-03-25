@@ -6,6 +6,7 @@ import { UsersModule } from './users.module';
 import { InitController } from '../controllers/init.controller';
 import { LoggerMiddleware } from '../middlewares/logger.http.middleware';
 import { TeachersModule } from './teachers.module';
+import { StudentsModule } from './students.module';
 
 
 @Module({
@@ -14,7 +15,8 @@ import { TeachersModule } from './teachers.module';
     DatabaseModule,
     AuthModule,
     UsersModule,
-    TeachersModule,  
+    TeachersModule,
+    StudentsModule,  
   ],
   controllers: [ InitController ],
   providers: [ ],

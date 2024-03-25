@@ -19,21 +19,21 @@ export class LoginUseCase {
       const repoUser = await this.usersRepository.find({ email: user.email, password: user.password });
       if (!repoUser) throw new HttpException('Credenciales Inválidas', HttpStatus.UNAUTHORIZED);
       const token = await this.authService.generateToken(repoUser);
-      return { 
-        ...token, 
+      return {
+        ...token,
         id: repoUser.id,
         name: repoUser.name,
         lastname: repoUser.lastname,
-        email: repoUser.email 
+        email: repoUser.email
       };
 
     } catch (error) {
-      if(!error) throw new HttpException('Error al autenticar al usuario', HttpStatus.INTERNAL_SERVER_ERROR);
+      if (!error) throw new HttpException('Error al autenticar al usuario', HttpStatus.INTERNAL_SERVER_ERROR);
       throw new HttpException(error.message, error.status ?? HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
-  
-  
+
+
 }
 

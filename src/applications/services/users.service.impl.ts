@@ -20,7 +20,7 @@ export class UsersServiceImpl implements UsersService {
     return this.usersUseCase.findById(id);
   }
   create(user: UserDto): Promise<User> {
-      return this.usersUseCase.create(user);
+    return this.usersUseCase.create(user);
   }
   updateAt(id:UUID, user: UserDto): Promise<boolean> {
     return this.usersUseCase.update(id, user);
