@@ -1,8 +1,7 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 import { sign, verify } from 'jsonwebtoken';
-import { User } from "src/domains/entities/user.entity";
-import { AuthEntity } from "src/domains/entities/auth.entity";
-import { JwtService } from "./jwt.service";
+import { User } from 'src/domains/entities/user.entity';
+import { JwtService } from './jwt.service';
 
 @Injectable()
 export class JwtServiceImpl implements JwtService {
@@ -16,4 +15,4 @@ export class JwtServiceImpl implements JwtService {
     const expiresIn = process.env.JWT_EXPIRES_IN;
     return { token: sign({ ...payload }, secret, { expiresIn }) };
   }
-} 
+}

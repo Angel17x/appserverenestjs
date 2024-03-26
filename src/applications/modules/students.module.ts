@@ -7,6 +7,7 @@ import { StudentUseCase } from 'src/domains/usecases/students.usecase';
 import { JwtServiceImpl } from '../services/jwt.service.impl';
 import { StudentController } from '../controllers/student.controller';
 import { UsersRepositoryImpl } from 'src/infrastructures/repositories/users.repository.impl';
+import { TeacherRepositoryImpl } from 'src/infrastructures/repositories/teacher.repository.impl';
 
 @Module({
   imports: [DatabaseModule],
@@ -17,13 +18,12 @@ import { UsersRepositoryImpl } from 'src/infrastructures/repositories/users.repo
     StudentRepositoryImpl,
     UsersRepositoryImpl,
     StudentServiceImpl,
-    StudentUseCase
+    TeacherRepositoryImpl,
+    StudentUseCase,
   ],
 })
-export class StudentsModule implements NestModule{
+export class StudentsModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-     .apply(AuthMiddleware)
-     .forRoutes(StudentController);
+    consumer.apply(AuthMiddleware).forRoutes(StudentController);
   }
 }

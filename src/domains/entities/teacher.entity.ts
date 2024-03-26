@@ -3,7 +3,7 @@ import { User } from "./user.entity";
 
 @Entity({ name: "teacher" })
 export class Teacher {
-  @PrimaryGeneratedColumn('uuid', { name: 'idbinnacle' })
+  @PrimaryGeneratedColumn('uuid', { name: 'idteacher' })
   idTeacher: string;
 
   @Column({ name: 'name' })

@@ -1,4 +1,15 @@
-import { Body, Controller, Delete, Get, HttpStatus, Post, Put, Query, Res, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  Post,
+  Put,
+  Query,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthMiddleware } from 'src/applications/middlewares/auth.middleware';
 import { UUID } from 'crypto';
 import { TeacherServiceImpl } from '../services/teacher.service.impl';
@@ -15,9 +26,9 @@ export class TeachersController {
   @Get('/teachers')
   async findAll(
     @Query('page') page: number = 0,
-    @Query('limit') limit: number = 20
-  ): Promise<PaginateResponse<Teacher>> { // establecer un límite máximo de 100
-    return await this.teacherService.findAll({page, limit});
+    @Query('limit') limit: number = 20,
+  ): Promise<PaginateResponse<Teacher>> {
+    return await this.teacherService.findAll({ page, limit });
   }
 
   @Get('/teacher')
@@ -31,7 +42,11 @@ export class TeachersController {
   }
 
   @Put('/update-teacher')
-  async update(@Query('id') id: UUID, @Body() user: TeacherDto, @Res() res): Promise<void> {
+  async update(
+    @Query('id') id: UUID,
+    @Body() user: TeacherDto,
+    @Res() res,
+  ): Promise<void> {
     await this.teacherService.updateAt(id, user);
     return res.status(HttpStatus.NO_CONTENT).send();
   }

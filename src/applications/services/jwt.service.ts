@@ -1,5 +1,4 @@
-import { User } from "src/domains/entities/user.entity";
-import { AuthEntity } from "src/domains/entities/auth.entity";
+import { User } from 'src/domains/entities/user.entity';
 
 export interface JwtService {
   sign(user: User): Promise<any>;

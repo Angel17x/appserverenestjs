@@ -36,7 +36,7 @@ export class TeacherUseCase {
 
   async findById(id: UUID): Promise<Teacher> {
     try {
-      if (!id) throw new HttpException('ID not provided', HttpStatus.BAD_REQUEST);
+      if (!id) throw new HttpException('ID query not provided', HttpStatus.BAD_REQUEST);
       const repoTeacher = await this.teacherRepository.findById(id);
       if (!repoTeacher) throw new HttpException('ID not found', HttpStatus.NOT_FOUND);
       return repoTeacher;
@@ -56,7 +56,7 @@ export class TeacherUseCase {
       if (isExistsUserId) throw new HttpException('Este ID de usuario ya se encuentra afiliado a un profesor', HttpStatus.BAD_REQUEST);
       if (repoUser.name !== teacher.name) throw new HttpException('El nombre no coincide con el del usuario', HttpStatus.BAD_REQUEST);
       if (repoUser.lastname !== teacher.lastname) throw new HttpException('El apellido no coincide con el del usuario', HttpStatus.BAD_REQUEST);
-      if (repoUser.role !== Role.TEACHER) throw new HttpException(`El usuario no es un tipo role 'TEACHER'`, HttpStatus.BAD_REQUEST);
+      if (repoUser.role !== Role.TEACHER) throw new HttpException(`El ID del usuario no es un tipo role 'TEACHER'`, HttpStatus.BAD_REQUEST);
       const newTeacher = await this.teacherRepository.create(
         {
           name: teacher.name,
@@ -83,8 +83,7 @@ export class TeacherUseCase {
 
   async update(id: UUID, teacher: TeacherDto): Promise<boolean> {
     try {
-      console.warn(id);
-      if (!id) throw new HttpException('ID not provided', HttpStatus.BAD_REQUEST)
+      if (!id) throw new HttpException('ID query not provided', HttpStatus.BAD_REQUEST)
       const teacherUpdated = await this.teacherRepository.updateAt(
         id,
         {
@@ -107,7 +106,6 @@ export class TeacherUseCase {
 
   async delete(id: UUID): Promise<boolean> {
     try {
-      console.error(id);
       if (!id) throw new HttpException('ID not found', HttpStatus.BAD_REQUEST);
       const teacherDeleted = await this.teacherRepository.delete(id);
       if (!teacherDeleted) throw new HttpException(`'El ID de profesor que estas intentando eliminar no existe`, HttpStatus.NOT_FOUND)

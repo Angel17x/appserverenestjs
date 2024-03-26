@@ -6,12 +6,10 @@ import { ConfigModule } from '@nestjs/config';
     ConfigModule.forRoot({
       envFilePath: `.env.${process.env.NODE_ENV}`, //envFilePath: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}`: '.env',
       isGlobal: true,
-    })
-  ], 
+    }),
+  ],
   controllers: [],
-  providers: [ ],
-  exports: [ ConfigModule ]
+  providers: [],
+  exports: [ConfigModule],
 })
-export class ConfigModules {
-    
-}
+export class ConfigModules {}

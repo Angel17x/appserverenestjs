@@ -7,24 +7,23 @@ import { InitController } from '../controllers/init.controller';
 import { LoggerMiddleware } from '../middlewares/logger.http.middleware';
 import { TeachersModule } from './teachers.module';
 import { StudentsModule } from './students.module';
-
+import { SubjectsModule } from './subjects.module';
 
 @Module({
-  imports: [ 
-    ConfigModules, 
+  imports: [
+    ConfigModules,
     DatabaseModule,
     AuthModule,
     UsersModule,
     TeachersModule,
-    StudentsModule,  
+    StudentsModule,
+    SubjectsModule,
   ],
-  controllers: [ InitController ],
-  providers: [ ],
+  controllers: [InitController],
+  providers: [],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-   .apply(LoggerMiddleware)
-   .forRoutes("*");
+    consumer.apply(LoggerMiddleware).forRoutes('*');
   }
-} 
+}

@@ -15,5 +15,4 @@ export class LoginController {
   async login(@Body() user: LoginDto): Promise<AuthEntity | null> {
     return this.loginService.auth(user);
   }
-
 }

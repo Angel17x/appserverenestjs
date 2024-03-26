@@ -6,7 +6,6 @@ import { TeacherServiceImpl } from '../services/teacher.service.impl';
 import { TeacherUseCase } from '../../domains/usecases/teacher.usecase';
 import { UsersRepositoryImpl } from 'src/infrastructures/repositories/users.repository.impl';
 import { TeacherRepositoryImpl } from 'src/infrastructures/repositories/teacher.repository.impl';
-import { TeacherRepository } from 'src/domains/repositories/teacher.repository';
 import { TeachersController } from '../controllers/teachers.controller';
 
 @Module({
@@ -17,13 +16,11 @@ import { TeachersController } from '../controllers/teachers.controller';
     TeacherRepositoryImpl,
     TeacherServiceImpl,
     TeacherUseCase,
-    UsersRepositoryImpl
+    UsersRepositoryImpl,
   ],
 })
 export class TeachersModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(AuthMiddleware)
-      .forRoutes(TeachersController);
+    consumer.apply(AuthMiddleware).forRoutes(TeachersController);
   }
 }

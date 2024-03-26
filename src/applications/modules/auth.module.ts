@@ -12,12 +12,12 @@ import { JwtServiceImpl } from '../services/jwt.service.impl';
   imports: [DatabaseModule],
   controllers: [LoginController],
   providers: [
-    LoginUseCase, 
-    UsersRepositoryImpl, 
-    LoginServiceImpl, 
-    AuthMiddleware, 
-    AuthServiceImpl, 
-    JwtServiceImpl
+    LoginUseCase,
+    UsersRepositoryImpl,
+    LoginServiceImpl,
+    AuthMiddleware,
+    AuthServiceImpl,
+    JwtServiceImpl,
   ], // Asegúrate de incluir UsersRepositoryImpl en los providers de AuthModule
 })
 export class AuthModule {}

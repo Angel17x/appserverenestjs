@@ -4,7 +4,7 @@ import { User } from "./user.entity";
 @Entity({ name: 'student' })
 export class Student {
   @PrimaryGeneratedColumn('uuid', { name: 'idstudent' })
-  idTeacher: string;
+  idStudent: string;
 
   @Column({ name: 'name' })
   name: string;
@@ -20,5 +20,5 @@ export class Student {
 
   @ManyToOne(() => User, { eager: true }) // Indica la relación con la entidad User
   @JoinColumn({ name: 'userid', referencedColumnName: 'id' })
-  userid: User;
+  userId: User;
 }

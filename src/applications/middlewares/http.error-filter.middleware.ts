@@ -20,7 +20,10 @@ export class HttpErrorFilter implements ExceptionFilter {
     const exceptionResponse = exception.getResponse();
 
     // Este puede ser un string, un objeto o un array, dependiendo del error
-    const message = exceptionResponse instanceof Object ? exceptionResponse['message'] : exceptionResponse;
+    const message =
+      exceptionResponse instanceof Object
+        ? exceptionResponse['message']
+        : exceptionResponse;
 
     const errorResponse = {
       statusCode: status,
@@ -33,7 +36,10 @@ export class HttpErrorFilter implements ExceptionFilter {
     if (status === HttpStatus.INTERNAL_SERVER_ERROR) {
       this.logger.error(`${request.method} ${request.url}`, exception.stack);
     } else {
-      this.logger.error(`${request.method} ${request.url}`, JSON.stringify(errorResponse));
+      this.logger.error(
+        `${request.method} ${request.url}`,
+        JSON.stringify(errorResponse),
+      );
     }
 
     response.status(status).json(errorResponse);

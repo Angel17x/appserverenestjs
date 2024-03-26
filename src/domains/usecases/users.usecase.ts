@@ -5,6 +5,8 @@ import { UsersRepositoryImpl } from "src/infrastructures/repositories/users.repo
 import { UserDto } from "../../applications/dto/register-user.dto";
 import { UUID } from "crypto";
 import { Role } from "src/applications/enums/role.enum";
+import { PaginateResponse } from "../entities/generic.paginate.entity";
+import { PaginateDto } from "src/applications/dto/paginate.dto";
 
 @Injectable()
 @Catch(HttpException)
@@ -24,10 +26,16 @@ export class UsersUseCase {
     }
   }
 
-  async findAll(): Promise<User[]> {
+  async findAll(paginate: PaginateDto): Promise<PaginateResponse<User>> {
     try {
-      const repoUser = await this.usersRepository.findAll();
-      return repoUser;
+      const paginateDefault = {
+        page: !isNaN(paginate.page) && paginate.page > 0 ? paginate.page : 1,
+        limit: !isNaN(paginate.limit) && paginate.limit > 0 ? paginate.limit : 20,
+      };
+      const [data, total] = await this.usersRepository.findAll(paginateDefault);
+      const totalPages = Math.ceil(total / paginateDefault.limit); // Usar paginateDefault.limit
+
+      return { status: HttpStatus.OK, data: data, total: total, totalPages, ...paginateDefault };
 
     } catch (error) {
       if (!error) throw new HttpException('Error al obtener los usuarios', HttpStatus.INTERNAL_SERVER_ERROR);
@@ -61,6 +69,25 @@ export class UsersUseCase {
         }
       );
       return newUser;
+
+    } catch (error) {
+      if (!error) throw new HttpException('Error al crear el usuarios', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException(error.message, error.status ?? HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async createSeed(user: UserDto): Promise<User | null> {
+    try {
+      const isExistsUser = await this.usersRepository.isExists(user.email);
+      return (isExistsUser ? null : await this.usersRepository.create(
+        {
+          name: user.name,
+          lastname: user.lastname,
+          email: user.email,
+          password: user.password,
+          role: user.role ?? Role.PEOPLE
+        })
+      );
 
     } catch (error) {
       if (!error) throw new HttpException('Error al crear el usuarios', HttpStatus.INTERNAL_SERVER_ERROR);

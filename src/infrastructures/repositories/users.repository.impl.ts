@@ -6,14 +6,19 @@ import { LoginDto } from "src/applications/dto/login.dto";
 import { User } from "src/domains/entities/user.entity";
 import { UsersRepository } from "src/domains/repositories/users.repository";
 import { UserDto } from "src/applications/dto/register-user.dto";
+import { PaginateDto } from "src/applications/dto/paginate.dto";
 
 @Injectable()
 export class UsersRepositoryImpl implements UsersRepository {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>) { }
-  findAll(): Promise<User[]> {
-    return this.userRepository.find({ cache: true });
+  async findAll(paginate: PaginateDto): Promise<[User[], number]> {
+    const [result, total] = await this.userRepository.findAndCount({
+      skip: ((paginate.page - 1) * paginate.limit) ?? 0, // Cuántas filas se deben saltar
+      take: paginate.limit, // Cuántas filas se deben tomar
+    });
+    return [result, total];
   }
   findById(id: any): Promise<User> {
     return this.userRepository.findOne({ where: { id: id } });

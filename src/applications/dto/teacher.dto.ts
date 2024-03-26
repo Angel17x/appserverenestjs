@@ -1,5 +1,10 @@
-import { IsString, MinLength, IsPhoneNumber, IsUUID, isNotEmpty, IsEmpty, IsNotEmpty } from 'class-validator';
-import { UUID } from 'crypto';
+import {
+  IsString,
+  MinLength,
+  IsPhoneNumber,
+  IsUUID,
+  IsNotEmpty,
+} from 'class-validator';
 import { User } from 'src/domains/entities/user.entity';
 
 export class TeacherDto {

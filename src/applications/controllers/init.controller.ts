@@ -1,23 +1,22 @@
-import { Controller, Get, HttpStatus } from "@nestjs/common";
+import { Controller, Get, HttpStatus } from '@nestjs/common';
 
 @Controller()
 export class InitController {
   constructor() {}
-  
+
   @Get('/')
   async init(): Promise<any> {
-    return ({
+    return {
       status: HttpStatus.OK,
-      message: 'welcome to the application school'
-    })
+      message: 'welcome to the application school',
+    };
   }
 
   @Get('/test')
   async test(): Promise<any> {
-    return ({
+    return {
       status: HttpStatus.OK,
-      message: 'welcome to the test route application school'
-    })
+      message: 'welcome to the test route application school',
+    };
   }
-  
 }

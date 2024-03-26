@@ -1,4 +1,10 @@
-import { IsString, MinLength, IsPhoneNumber, IsUUID, IsNotEmpty } from 'class-validator';
+import {
+  IsString,
+  MinLength,
+  IsPhoneNumber,
+  IsUUID,
+  IsNotEmpty,
+} from 'class-validator';
 
 export class TeacherRegisterDto {
   @IsString()
